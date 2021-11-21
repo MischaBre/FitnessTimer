@@ -38,11 +38,12 @@ class TimerManager: ObservableObject {
             setRepetitions(set_reps: rep, set_MaxReps: maxRep)
             setTimer(set_sec: sec, set_pause: pau)
             self.timerActive = true
+            AudioServicesPlaySystemSound(1111)
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if self.duration > 0 {
                     self.duration -= 1
                     if self.duration == 0 {
-                        AudioServicesPlaySystemSound(1106)
+                        AudioServicesPlaySystemSound(1154)
                     }
                 } else {
                     if self.pause > 0 {
@@ -51,7 +52,6 @@ class TimerManager: ObservableObject {
                         self.stopTimer()
                         if self.repetitions < self.maxRepititions {
                             self.repetitions += 1
-                            AudioServicesPlaySystemSound(1105)
                             self.startTimer(sec: sec, pau: pau, rep: self.repetitions, maxRep: maxRep)
                         } else {
                             self.repetitions = 1

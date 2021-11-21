@@ -22,13 +22,28 @@ struct ContentView: View {
                 .fontWeight(.heavy)
             VStack (alignment: .trailing){
                 Slider(value: $timer_rep, in: 1...20)
-                Text("\(String(Int(timer_rep))) Wiederholungen")
-            
+                HStack {
+                    
+                    TextField("", value: $timer_rep, formatter: NumberFormatter())
+                        .frame(width: 25)
+                    Text(" Wiederholungen")
+                }
+                
                 Slider(value: $timer_time, in: 5...600)
-                Text("\(String(Int(timer_time))) Sek Timer")
+                HStack {
+                    
+                    TextField("", value: $timer_time, formatter: NumberFormatter())
+                        .frame(width: 25)
+                    Text(" Sekunden Timer")
+                }
             
                 Slider(value: $timer_break, in: 1...300)
-                Text("\(String(Int(timer_break))) Sek Pause")
+                HStack {
+                    
+                    TextField("", value: $timer_break, formatter: NumberFormatter())
+                        .frame(width: 25)
+                    Text(" Sekunden Pause")
+                }
             }
             
             Button(action: {
@@ -49,35 +64,6 @@ struct ContentView: View {
             .sheet(isPresented: $timerManager.timerActive) {
                 TimerView().environmentObject(timerManager)
             }
-        }
-        .padding()
-    }
-}
-
-struct TimerView: View {
-    @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var timerManager: TimerManager
-
-    var body: some View {
-        VStack {
-            TimerDetailView(time: $timerManager.duration, pause: $timerManager.pause, rep: $timerManager.repetitions, maxRep: $timerManager.maxRepititions)
-            //Text("\(timerManager.repetitions) x \(timerManager.duration) : \(timerManager.pause)")
-            Button(action: {
-                timerManager.stopTimer()
-                //dismiss()
-            }) {
-                RoundedRectangle(cornerRadius: 8)
-                    .frame(height: 20)
-                    .overlay(Text("Stop!")
-                                .foregroundColor(.white)
-                                .font(.title)
-                                .fontWeight(.heavy))
-                    .foregroundColor(Color.accentColor)
-                    .padding()
-            }
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .background(Color.accentColor)
-            .cornerRadius(16)
         }
         .padding()
     }

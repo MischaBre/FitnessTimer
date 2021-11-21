@@ -22,8 +22,8 @@ struct TimerDetailView: View {
                     .offset(y: -10)
                 Spacer()
                 Text("\(rep) / \(maxRep)")
-                    .fontWeight(.heavy)
-                    .font(.system(size: 60))
+                                .fontWeight(.heavy)
+                                .font(.system(size: 60))
             }
             HStack(alignment: .bottom) {
                 Text("pause:")
