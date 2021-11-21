@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B10B5AEF274A4B2B00338882 /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10B5AEE274A4B2B00338882 /* TimerManager.swift */; };
+		B10B5AF1274AA2B300338882 /* TimerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10B5AF0274AA2B300338882 /* TimerDetailView.swift */; };
 		B182C86B2749A2D000802DE0 /* FitnessTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B182C86A2749A2D000802DE0 /* FitnessTimerApp.swift */; };
 		B182C86D2749A2D000802DE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B182C86C2749A2D000802DE0 /* ContentView.swift */; };
 		B182C86F2749A2D100802DE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B182C86E2749A2D100802DE0 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		B10B5AEE274A4B2B00338882 /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
+		B10B5AF0274AA2B300338882 /* TimerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDetailView.swift; sourceTree = "<group>"; };
 		B182C8672749A2D000802DE0 /* FitnessTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B182C86A2749A2D000802DE0 /* FitnessTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTimerApp.swift; sourceTree = "<group>"; };
 		B182C86C2749A2D000802DE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				B182C86E2749A2D100802DE0 /* Assets.xcassets */,
 				B182C8702749A2D100802DE0 /* Preview Content */,
 				B10B5AEE274A4B2B00338882 /* TimerManager.swift */,
+				B10B5AF0274AA2B300338882 /* TimerDetailView.swift */,
 			);
 			path = FitnessTimer;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			files = (
 				B10B5AEF274A4B2B00338882 /* TimerManager.swift in Sources */,
 				B182C86D2749A2D000802DE0 /* ContentView.swift in Sources */,
+				B10B5AF1274AA2B300338882 /* TimerDetailView.swift in Sources */,
 				B182C86B2749A2D000802DE0 /* FitnessTimerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

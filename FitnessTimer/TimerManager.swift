@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 class TimerManager: ObservableObject {
     
@@ -13,7 +14,8 @@ class TimerManager: ObservableObject {
     @Published var timerActive: Bool = false
     @Published var duration: Int = 0
     @Published var pause: Int = 0
-    @Published var repetitions: Int = 0
+    @Published var repetitions: Int = 1
+    @Published var maxRepititions: Int = 1
     
     init() { }
     
@@ -24,29 +26,35 @@ class TimerManager: ObservableObject {
         self.pause = pause
     }
     
-    func setRepetitions(set_reps: Int) {
+    func setRepetitions(set_reps: Int, set_MaxReps: Int) {
         let repetitions = set_reps
+        let maxRepetitions = set_MaxReps
         self.repetitions = repetitions
+        self.maxRepititions = maxRepetitions
     }
     
-    func startTimer(sec: Int, pau: Int, rep: Int) {
-        if sec*pau*rep != 0 {
-            setRepetitions(set_reps: rep)
+    func startTimer(sec: Int, pau: Int, rep: Int, maxRep: Int) {
+        if sec*pau*rep*maxRep != 0 {
+            setRepetitions(set_reps: rep, set_MaxReps: maxRep)
             setTimer(set_sec: sec, set_pause: pau)
             self.timerActive = true
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if self.duration > 0 {
                     self.duration -= 1
+                    if self.duration == 0 {
+                        AudioServicesPlaySystemSound(1106)
+                    }
                 } else {
                     if self.pause > 0 {
                         self.pause -= 1
                     } else {
                         self.stopTimer()
-                        if self.repetitions > 1 {
-                            self.repetitions -= 1
-                            self.startTimer(sec: sec, pau: pau, rep: self.repetitions)
+                        if self.repetitions < self.maxRepititions {
+                            self.repetitions += 1
+                            AudioServicesPlaySystemSound(1105)
+                            self.startTimer(sec: sec, pau: pau, rep: self.repetitions, maxRep: maxRep)
                         } else {
-                            self.repetitions = 0
+                            self.repetitions = 1
                         }
                     }
                 }

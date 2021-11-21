@@ -6,48 +6,51 @@
 //
 
 import SwiftUI
-import AVFoundation
 
 struct ContentView: View {
     
     @ObservedObject var timerManager = TimerManager()
     
-    @State private var timer_rep: Double = 0.0
-    @State private var timer_time: Double = 0.0
-    @State private var timer_break: Double = 0.0
-    @State private var show_timer: Bool = false
+    @State private var timer_rep: Double = 1
+    @State private var timer_time: Double = 5
+    @State private var timer_break: Double = 1
     
     var body: some View {
         VStack (alignment: .center) {
+            Text(".FitnessTimer")
+                .font(.system(size: 45))
+                .fontWeight(.heavy)
             VStack (alignment: .trailing){
-                Slider(value: $timer_rep)
-                Text("\(String(Int(20*timer_rep))) Wiederholungen")
+                Slider(value: $timer_rep, in: 1...20)
+                Text("\(String(Int(timer_rep))) Wiederholungen")
             
-                Slider(value: $timer_time)
-                Text("\(String(Int(600*timer_time))) Sek Timer")
+                Slider(value: $timer_time, in: 5...600)
+                Text("\(String(Int(timer_time))) Sek Timer")
             
-                Slider(value: $timer_break)
-                Text("\(String(Int(30*timer_break))) Sek Pause")
+                Slider(value: $timer_break, in: 1...300)
+                Text("\(String(Int(timer_break))) Sek Pause")
             }
             
             Button(action: {
-                show_timer.toggle()
-                timerManager.startTimer(sec: 2, pau: 1, rep: 3)
+                timerManager.startTimer(sec: Int(timer_time), pau: Int(timer_break), rep: 1, maxRep: Int(timer_rep))
             }) {
                 RoundedRectangle(cornerRadius: 8)
-                    .frame(height: 10)
-                    .overlay(Text("Go!").foregroundColor(.white))
+                    .frame(height: 20)
+                    .overlay(Text("Los!")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .fontWeight(.heavy))
                     .foregroundColor(Color.accentColor)
                     .padding()
             }
             .frame(minWidth: 0, maxWidth: .infinity)
-            
             .background(Color.accentColor)
             .cornerRadius(16)
-            .sheet(isPresented: $show_timer) {
+            .sheet(isPresented: $timerManager.timerActive) {
                 TimerView().environmentObject(timerManager)
             }
-        }.padding()
+        }
+        .padding()
     }
 }
 
@@ -57,14 +60,26 @@ struct TimerView: View {
 
     var body: some View {
         VStack {
-            Text("\(timerManager.repetitions) x \(timerManager.duration) : \(timerManager.pause)")
+            TimerDetailView(time: $timerManager.duration, pause: $timerManager.pause, rep: $timerManager.repetitions, maxRep: $timerManager.maxRepititions)
+            //Text("\(timerManager.repetitions) x \(timerManager.duration) : \(timerManager.pause)")
             Button(action: {
                 timerManager.stopTimer()
-                dismiss()
+                //dismiss()
             }) {
-                Text("Stop")
+                RoundedRectangle(cornerRadius: 8)
+                    .frame(height: 20)
+                    .overlay(Text("Stop!")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .fontWeight(.heavy))
+                    .foregroundColor(Color.accentColor)
+                    .padding()
             }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .background(Color.accentColor)
+            .cornerRadius(16)
         }
+        .padding()
     }
 }
 
