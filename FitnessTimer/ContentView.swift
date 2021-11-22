@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     
     @ObservedObject var timerManager = TimerManager()
@@ -25,7 +26,9 @@ struct ContentView: View {
                 HStack {
                     
                     TextField("", value: $timer_rep, formatter: NumberFormatter())
-                        .frame(width: 25)
+                        .frame(width: 35)
+                        .multilineTextAlignment(.trailing)
+                        .keyboardType(.numberPad)
                     Text(" Wiederholungen")
                 }
                 
@@ -33,7 +36,9 @@ struct ContentView: View {
                 HStack {
                     
                     TextField("", value: $timer_time, formatter: NumberFormatter())
-                        .frame(width: 25)
+                        .frame(width: 35)
+                        .multilineTextAlignment(.trailing)
+                        .keyboardType(.numberPad)
                     Text(" Sekunden Timer")
                 }
             
@@ -41,13 +46,16 @@ struct ContentView: View {
                 HStack {
                     
                     TextField("", value: $timer_break, formatter: NumberFormatter())
-                        .frame(width: 25)
+                        .frame(width: 35)
+                        .multilineTextAlignment(.trailing)
+                        .keyboardType(.numberPad)
                     Text(" Sekunden Pause")
                 }
             }
             
             Button(action: {
                 timerManager.startTimer(sec: Int(timer_time), pau: Int(timer_break), rep: 1, maxRep: Int(timer_rep))
+                UIApplication.shared.isIdleTimerDisabled.toggle()
             }) {
                 RoundedRectangle(cornerRadius: 8)
                     .frame(height: 20)
@@ -62,7 +70,11 @@ struct ContentView: View {
             .background(Color.accentColor)
             .cornerRadius(16)
             .sheet(isPresented: $timerManager.timerActive) {
-                TimerView().environmentObject(timerManager)
+                TimerView()
+                    .environmentObject(timerManager)
+                    .onDisappear {
+                        timerManager.stopTimer()
+                    }
             }
         }
         .padding()

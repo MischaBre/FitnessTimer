@@ -32,6 +32,7 @@ struct TimerView: View {
             .background(Color.accentColor)
             .cornerRadius(16)
         }
+
         .padding()
     }
 }

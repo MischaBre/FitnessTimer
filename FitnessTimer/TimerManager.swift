@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 class TimerManager: ObservableObject {
     
@@ -34,29 +35,37 @@ class TimerManager: ObservableObject {
     }
     
     func startTimer(sec: Int, pau: Int, rep: Int, maxRep: Int) {
+        if self.timerActive {
+            self.stopTimer()
+        }
         if sec*pau*rep*maxRep != 0 {
             setRepetitions(set_reps: rep, set_MaxReps: maxRep)
             setTimer(set_sec: sec, set_pause: pau)
             self.timerActive = true
             AudioServicesPlaySystemSound(1111)
+            UIApplication.shared.isIdleTimerDisabled = true
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                if self.duration > 0 {
-                    self.duration -= 1
-                    if self.duration == 0 {
-                        AudioServicesPlaySystemSound(1154)
-                    }
+                self.countDown(sec: sec, pau: pau, rep: self.repetitions, maxRep: maxRep)
+            }
+        }
+    }
+    
+    func countDown (sec: Int, pau: Int, rep: Int, maxRep: Int) {
+        if self.duration > 0 {
+            self.duration -= 1
+            if self.duration == 0 {
+                AudioServicesPlaySystemSound(1154)
+            }
+        } else {
+            if self.pause > 0 {
+                self.pause -= 1
+            } else {
+                self.stopTimer()
+                if self.repetitions < self.maxRepititions {
+                    self.repetitions += 1
+                    self.startTimer(sec: sec, pau: pau, rep: self.repetitions, maxRep: maxRep)
                 } else {
-                    if self.pause > 0 {
-                        self.pause -= 1
-                    } else {
-                        self.stopTimer()
-                        if self.repetitions < self.maxRepititions {
-                            self.repetitions += 1
-                            self.startTimer(sec: sec, pau: pau, rep: self.repetitions, maxRep: maxRep)
-                        } else {
-                            self.repetitions = 1
-                        }
-                    }
+                    self.repetitions = 1
                 }
             }
         }
@@ -65,6 +74,7 @@ class TimerManager: ObservableObject {
     func stopTimer() {
         self.timerActive = false
         timer.invalidate()
+        UIApplication.shared.isIdleTimerDisabled = false
         duration = 0
         pause = 0
     }
