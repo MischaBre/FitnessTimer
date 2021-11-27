@@ -75,12 +75,6 @@ struct ContentView: View {
     
 }
 
-extension Int {
-    func SecondsToTime() -> String {
-        return String(format: "%02i:%02i", self/60, self%60)
-    }
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()

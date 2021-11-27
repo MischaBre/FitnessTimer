@@ -37,11 +37,11 @@ struct TimerDetailView: View {
             HStack(alignment: .bottom) {
                 Text("time:")
                     .font(.title3)
-                    .offset(y: -20)
+                    .offset(y: -10)
                 Spacer()
                 Text("\(time.SecondsToTime())")
                     .fontWeight(.heavy)
-                    .font(.system(size: 100))
+                    .font(.system(size: 60))
             }
         }
     }

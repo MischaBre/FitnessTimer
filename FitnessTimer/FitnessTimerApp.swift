@@ -15,3 +15,10 @@ struct FitnessTimerApp: App {
         }
     }
 }
+
+
+extension Int {
+    func SecondsToTime() -> String {
+        return String(format: "%02i:%02i", self/60, self%60)
+    }
+}
