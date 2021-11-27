@@ -16,6 +16,7 @@
 		B182C87C2749A2D100802DE0 /* FitnessTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B182C87B2749A2D100802DE0 /* FitnessTimerTests.swift */; };
 		B182C8862749A2D100802DE0 /* FitnessTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B182C8852749A2D100802DE0 /* FitnessTimerUITests.swift */; };
 		B182C8882749A2D100802DE0 /* FitnessTimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B182C8872749A2D100802DE0 /* FitnessTimerUITestsLaunchTests.swift */; };
+		B1E1BDA6275248A300321B2F /* SliderButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E1BDA5275248A300321B2F /* SliderButtonView.swift */; };
 		B1EC6310274ABC870049CCD5 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1EC630F274ABC870049CCD5 /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		B182C8812749A2D100802DE0 /* FitnessTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitnessTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B182C8852749A2D100802DE0 /* FitnessTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTimerUITests.swift; sourceTree = "<group>"; };
 		B182C8872749A2D100802DE0 /* FitnessTimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B1E1BDA5275248A300321B2F /* SliderButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderButtonView.swift; sourceTree = "<group>"; };
 		B1EC630F274ABC870049CCD5 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,13 +102,11 @@
 		B182C8692749A2D000802DE0 /* FitnessTimer */ = {
 			isa = PBXGroup;
 			children = (
+				B1E1BDA42752487A00321B2F /* Views */,
 				B182C86A2749A2D000802DE0 /* FitnessTimerApp.swift */,
 				B182C86E2749A2D100802DE0 /* Assets.xcassets */,
 				B182C8702749A2D100802DE0 /* Preview Content */,
 				B10B5AEE274A4B2B00338882 /* TimerManager.swift */,
-				B182C86C2749A2D000802DE0 /* ContentView.swift */,
-				B10B5AF0274AA2B300338882 /* TimerDetailView.swift */,
-				B1EC630F274ABC870049CCD5 /* TimerView.swift */,
 			);
 			path = FitnessTimer;
 			sourceTree = "<group>";
@@ -134,6 +134,17 @@
 				B182C8872749A2D100802DE0 /* FitnessTimerUITestsLaunchTests.swift */,
 			);
 			path = FitnessTimerUITests;
+			sourceTree = "<group>";
+		};
+		B1E1BDA42752487A00321B2F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B182C86C2749A2D000802DE0 /* ContentView.swift */,
+				B1EC630F274ABC870049CCD5 /* TimerView.swift */,
+				B10B5AF0274AA2B300338882 /* TimerDetailView.swift */,
+				B1E1BDA5275248A300321B2F /* SliderButtonView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1EC6310274ABC870049CCD5 /* TimerView.swift in Sources */,
+				B1E1BDA6275248A300321B2F /* SliderButtonView.swift in Sources */,
 				B10B5AEF274A4B2B00338882 /* TimerManager.swift in Sources */,
 				B182C86D2749A2D000802DE0 /* ContentView.swift in Sources */,
 				B10B5AF1274AA2B300338882 /* TimerDetailView.swift in Sources */,

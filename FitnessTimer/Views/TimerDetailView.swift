@@ -15,10 +15,10 @@ struct TimerDetailView: View {
     @Binding var maxRep: Int
     
     var body: some View {
-        VStack {
+        VStack (alignment:.trailing) {
             HStack(alignment: .bottom) {
                 Text("reps:")
-                    .font(.title)
+                    .font(.title3)
                     .offset(y: -10)
                 Spacer()
                 Text("\(rep) / \(maxRep)")
@@ -27,21 +27,21 @@ struct TimerDetailView: View {
             }
             HStack(alignment: .bottom) {
                 Text("pause:")
-                    .font(.title)
+                    .font(.title3)
                     .offset(y: -10)
                 Spacer()
-                Text("\(pause)")
+                Text("\(pause.SecondsToTime())")
                     .fontWeight(.heavy)
                     .font(.system(size: 60))
             }
             HStack(alignment: .bottom) {
                 Text("time:")
-                    .font(.title)
-                    .offset(y: -30)
+                    .font(.title3)
+                    .offset(y: -20)
                 Spacer()
-                Text("\(time)")
+                Text("\(time.SecondsToTime())")
                     .fontWeight(.heavy)
-                    .font(.system(size: 140))
+                    .font(.system(size: 100))
             }
         }
     }

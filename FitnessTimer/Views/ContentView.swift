@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
     
     @ObservedObject var timerManager = TimerManager()
     
-    @State private var timer_rep: Double = 1
-    @State private var timer_time: Double = 5
-    @State private var timer_break: Double = 1
+    
+    @State private var timerRep: Double = 1
+    @State private var timerMaxRep: Double = 30
+    @State private var timerTime: Double = 5
+    @State private var timerMaxTime: Double = 60
+    @State private var timerPause: Double = 1
+    @State private var timerMaxPause: Double = 30
     
     var body: some View {
         VStack (alignment: .center) {
@@ -22,39 +25,28 @@ struct ContentView: View {
                 .font(.system(size: 45))
                 .fontWeight(.heavy)
             VStack (alignment: .trailing){
-                Slider(value: $timer_rep, in: 1...20)
+                SliderButtonView(sliderVar: $timerRep, buttonVar: $timerMaxRep, buttonState: 1)
                 HStack {
-                    
-                    TextField("", value: $timer_rep, formatter: NumberFormatter())
-                        .frame(width: 35)
-                        .multilineTextAlignment(.trailing)
-                        .keyboardType(.numberPad)
-                    Text(" Wiederholungen")
+                    Spacer()
+                    Text("\(Int(timerRep)) reps")
+                        .font(.title)
                 }
-                
-                Slider(value: $timer_time, in: 5...600)
+                SliderButtonView(sliderVar: $timerTime, buttonVar: $timerMaxTime, buttonState: 3)
                 HStack {
-                    
-                    TextField("", value: $timer_time, formatter: NumberFormatter())
-                        .frame(width: 35)
-                        .multilineTextAlignment(.trailing)
-                        .keyboardType(.numberPad)
-                    Text(" Sekunden Timer")
+                    Spacer()
+                    Text("\(Int(timerTime).SecondsToTime()) time")
+                        .font(.title)
                 }
-            
-                Slider(value: $timer_break, in: 1...300)
+                SliderButtonView(sliderVar: $timerPause, buttonVar: $timerMaxPause, buttonState: 2)
                 HStack {
-                    
-                    TextField("", value: $timer_break, formatter: NumberFormatter())
-                        .frame(width: 35)
-                        .multilineTextAlignment(.trailing)
-                        .keyboardType(.numberPad)
-                    Text(" Sekunden Pause")
+                    Spacer()
+                    Text("\(Int(timerPause).SecondsToTime()) pause")
+                        .font(.title)
                 }
             }
             
             Button(action: {
-                timerManager.startTimer(sec: Int(timer_time), pau: Int(timer_break), rep: 1, maxRep: Int(timer_rep))
+                timerManager.startTimer(sec: Int(timerTime), pau: Int(timerPause), rep: 1, maxRep: Int(timerRep))
                 UIApplication.shared.isIdleTimerDisabled.toggle()
             }) {
                 RoundedRectangle(cornerRadius: 8)
@@ -78,6 +70,14 @@ struct ContentView: View {
             }
         }
         .padding()
+    }
+    
+    
+}
+
+extension Int {
+    func SecondsToTime() -> String {
+        return String(format: "%02i:%02i", self/60, self%60)
     }
 }
 
